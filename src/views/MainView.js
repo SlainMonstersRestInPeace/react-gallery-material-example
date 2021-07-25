@@ -10,16 +10,20 @@ import Gallery from './Gallery'
 import About from './About'
 import ImageInfo from './ImageInfo'
 
+import Container from '@material-ui/core/Container'
+
 export default () => {
   return (
     <>
       <Header />
-      <Switch>
-        <Route exact path="/" component={Gallery} />
-        <Route path="/gallery" component={Gallery} />
-        <Route path="/about" component={About} />
-        <Route path="/image/:id" component={ImageInfo} />
-      </Switch>
+      <Container fixed>
+        <Switch>
+          <Route exact path="/" component={Gallery} />
+          <Route path="/gallery" component={Gallery} />
+          <Route path="/about" component={About} />
+          <Route path="/image/:id" component={ImageInfo} />
+        </Switch>
+      </Container>
     </>
   );
 }

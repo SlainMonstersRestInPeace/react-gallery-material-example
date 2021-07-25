@@ -2,10 +2,30 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchPhotos } from '../redux/reducers/app'
 
-import PhotoCard from '../components/PhotoCard'
+import PhotoCategory from '../components/PhotoCategory'
 import { v4 as uuid } from 'uuid'
 
 import CircularProgress from '@material-ui/core/CircularProgress'
+
+import { styled } from '@material-ui/core/styles'
+
+const Content = styled('div')({
+  "& .gallery": {
+    animation: "$fade-in ease-in 0.1s"
+  },
+  "@global" : {
+    "@keyframes fade-in": {
+      "0%": {
+        opacity: "0",
+        transform: "translateY(20px)"
+      },
+      "100%": {
+        opacity: '1'
+      }
+    } 
+  }
+});
+
 
 export default () => {
   const photos = useSelector(state => state.app.photos);
@@ -31,18 +51,37 @@ export default () => {
     mounted();
   }, []);
 
-  const items = loaded ? photos.slice(0, 10) : [];
+  const items = loaded ? photos : [];
 
-  const photoElems = items.map(photo => {
+  const categories = [];
+
+  const MAX_CATEGORIES = 4;
+  const CATEGORY_MAX = 6;
+
+  for (let i = 0; i < MAX_CATEGORIES; i++) {
+    const idx = i*CATEGORY_MAX;
+
+    const category = items.slice(idx, idx + CATEGORY_MAX);
+
+    if (category.length > 0) {
+      categories.push(category);
+    }
+  }
+
+  const categoryList = categories.map((category, idx) => {
     return (
-      <PhotoCard key={uuid()} photo={photo}></PhotoCard>
+      <PhotoCategory key={uuid()} photos={category} label={`Category ${idx + 1}`}/>
     );
-  })
+  });
 
   return (
     <Choose>
       <When condition={loaded}>
-        {photoElems}
+        <Content>
+          <div className="gallery">
+            {categoryList}
+          </div>
+        </Content>
       </When>
       <Otherwise>
         <CircularProgress />
