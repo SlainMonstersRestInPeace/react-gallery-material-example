@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   fetchLoading: false,
   photos: [],
+  photo: null
 }
 
 const appSlice = createSlice({
@@ -12,8 +13,14 @@ const appSlice = createSlice({
     clearPhotos(state) {
       state.photos = [];
     },
+    clearPhoto(state) {
+      state.photo = null;
+    },
     setPhotos(state, action) {
       state.photos = action.payload;
+    },
+    setPhoto(state, action) {
+      state.photo = action.payload;
     },
     fetchStart(state) {
       state.fetchLoading = true;
@@ -28,7 +35,9 @@ const {
   fetchStart,
   fetchEnd,
   clearPhotos,
+  clearPhoto,
   setPhotos,
+  setPhoto
 } = appSlice.actions;
 
 import axios from 'axios'
@@ -80,13 +89,32 @@ function fetchPhotos(url, options) {
   }
 }
 
+function fetchPhoto(id, options) {
+  return async (dispatch, getState) => {
+    dispatch(clearPhoto());
+
+    const url = `https://jsonplaceholder.typicode.com/photos/${id}`;
+
+    await dispatch(fetchOperation(url, {
+      options,
+      transformResponse: res => res.data,
+      onSuccess: (data, { dispatch, getState }) => {
+        dispatch(setPhoto(data));
+      }
+    }));
+  }
+}
+
+
 export {
   fetchStart,
   fetchEnd,
   setPhotos,
+  setPhoto,
   clearPhotos,
   fetchOperation,
   fetchPhotos,
+  fetchPhoto
 }
 
 export default appSlice.reducer

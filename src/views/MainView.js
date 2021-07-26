@@ -1,7 +1,7 @@
 import React from 'react'
 
 import {
-  Switch, Route
+  Switch, Route, useRouteMatch
 } from 'react-router-dom'
 
 import Header from '../components/Header'
@@ -12,6 +12,15 @@ import ImageInfo from './ImageInfo'
 
 import Container from '@material-ui/core/Container'
 
+const ImgInfo = () => {
+  const match = useRouteMatch();
+  const id = match.params.id || 1;
+
+  return (
+    <ImageInfo id={id} />
+  );
+};
+
 export default () => {
   return (
     <>
@@ -21,7 +30,7 @@ export default () => {
           <Route exact path="/" component={Gallery} />
           <Route path="/gallery" component={Gallery} />
           <Route path="/about" component={About} />
-          <Route path="/image/:id" component={ImageInfo} />
+          <Route path="/image/:id" component={ImgInfo} />
         </Switch>
       </Container>
     </>
