@@ -1,7 +1,9 @@
 import React from 'react'
 
+import AboutCard from '../components/AboutCard'
+
 export default () => {
   return (
-    <>About placeholder!</>
+    <AboutCard />
   );
 }

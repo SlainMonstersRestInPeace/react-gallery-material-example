@@ -12,6 +12,8 @@ import ImageInfo from './ImageInfo'
 
 import Container from '@material-ui/core/Container'
 
+import { makeStyles } from '@material-ui/core/styles'
+
 const ImgInfo = () => {
   const match = useRouteMatch();
   const id = match.params.id || 1;
@@ -21,11 +23,19 @@ const ImgInfo = () => {
   );
 };
 
+const useStyles = makeStyles({
+  container: {
+    marginTop: "16px"
+  }
+})
+
 export default () => {
+  const classes = useStyles();
+
   return (
     <>
       <Header />
-      <Container fixed>
+      <Container fixed className={classes.container}>
         <Switch>
           <Route exact path="/" component={Gallery} />
           <Route path="/gallery" component={Gallery} />

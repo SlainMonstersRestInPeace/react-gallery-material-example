@@ -14,7 +14,7 @@ import MenuContent from './MenuContent';
 const useStyles = makeStyles({
   toggler: {
     marginRight: "16px"
-  }
+  },
 })
 
 export default () => {
@@ -38,7 +38,7 @@ export default () => {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer open={drawer} anchor="left" onClose={toggleDrawer}>
+      <Drawer open={drawer} anchor="left" onClose={toggleDrawer} >
         <MenuContent handleDrawer={toggleDrawer} />
       </Drawer>
     </>
