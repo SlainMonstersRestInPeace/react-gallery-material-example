@@ -7,6 +7,8 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import classnames from 'classnames'
 
+import Typography from '@material-ui/core/Typography'
+
 const useStyles = makeStyles({
   root: {
     display: "flex",
@@ -52,13 +54,13 @@ export default () => {
     <div className={classes.root}>
       <Card className={classes.card} variant="outlined">
         <CardContent className={classes.cardContent}>
-          <h5>Сергей Стенянский</h5>
+          <Typography variant="h6" className={classes.mb1}>Сергей Стенянский</Typography>
           <div className={classnames(classes.pfp, classes.mb1)} />
-          <h6 className={classes.mb0}>Front-End Developer</h6>
-          <p className={classes.mb1}>Javascript, HTML, CSS, React.js, Vue.js</p>
-          <p className={classes.mb0}>
+          <Typography variant="subtitle2" className={classes.mb0}>Front-End Developer</Typography>
+          <Typography variant="subtitle1" className={classes.mb1}>Javascript, HTML, CSS, React.js, Vue.js</Typography>
+          <Typography variant="body2" className={classes.mb0}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </p>
+          </Typography>
         </CardContent>
       </Card>
     </div>
