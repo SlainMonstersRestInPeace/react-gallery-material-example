@@ -8,20 +8,10 @@ import PhotoCard from './PhotoCard'
 
 import { v4 as uuid } from 'uuid'
 
-import { makeStyles } from '@material-ui/core/styles'
-
-const useStyles = makeStyles({
-  mb2: {
-    marginBottom: "16px"
-  },
-})
-
 export default ({
   photos,
   label
 }) => {
-  const classes = useStyles();
-
   const photoList = photos.map(photo => {
     return (
       <Grid item key={uuid()}>
