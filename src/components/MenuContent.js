@@ -25,7 +25,7 @@ const useStyles = makeStyles({
     marginBottom: '8px'
   },
   divider: {
-    background: "#3f3f3f",
+    background: "#dfdfdf",
     margin: "0 -8px"
   }
 })
