@@ -20,16 +20,18 @@ const useStyles = makeStyles({
     height: '100%',
     width: '100%',
     position: 'absolute',
-    background: 'transparent'
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   root: {
     height: '150px',
     width: '150px',
     position: 'relative',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
+    "& a": {
+      textDecoration: "none"
+    },
   
     '& .button-more': {
       opacity: '0',
@@ -50,8 +52,9 @@ export default ({
   return (
     <Box className={classes.root}>
       <img src={photo.thumbnailUrl} className={classes.photo}/>
-      <Button className="button-more" variant="contained" color="primary">More</Button>
-      <Link to={`/image/${photo.id}`} className={classes.link} />
+      <Link to={`/image/${photo.id}`} className={classes.link} >
+        <Button className="button-more" variant="contained" color="primary">More</Button>
+      </Link>
     </Box>
   );
 }
