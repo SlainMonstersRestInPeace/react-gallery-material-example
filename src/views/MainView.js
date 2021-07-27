@@ -10,6 +10,11 @@ import Gallery from './Gallery'
 import About from './About'
 import ImageInfo from './ImageInfo'
 
+
+
+
+import Grid from '@material-ui/core/Grid'
+import Box from '@material-ui/core/Box'
 import Container from '@material-ui/core/Container'
 
 import { makeStyles } from '@material-ui/core/styles'
@@ -26,6 +31,14 @@ const ImgInfo = () => {
 const useStyles = makeStyles({
   container: {
     marginTop: "16px"
+  },
+  item: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "150px",
+    height: "150px",
+    background: "red"
   }
 })
 
@@ -35,7 +48,25 @@ export default () => {
   return (
     <>
       <Header />
+
       <Container fixed className={classes.container}>
+        {/* <Grid spacing={2} container direction="row">
+          <Grid item  >
+            <Box className={classes.item} />
+          </Grid>
+          <Grid item  >
+            <Box className={classes.item} />
+          </Grid>
+          <Grid item  >
+            <Box className={classes.item} />
+          </Grid>
+          <Grid item  >
+            <Box className={classes.item} />
+          </Grid>
+          <Grid item  >
+            <Box className={classes.item} />
+          </Grid>
+        </Grid> */}
         <Switch>
           <Route exact path="/" component={Gallery} />
           <Route path="/gallery" component={Gallery} />

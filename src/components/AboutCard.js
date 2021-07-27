@@ -3,16 +3,9 @@ import React from 'react'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 
-import { styled, makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 
 import classnames from 'classnames'
-
-// const ProfilePicture = styled('div')({
-//   width: "100px",
-//   height: "100px",
-//   borderRadius: "100%",
-//   background: "#b5b5b5"
-// })
 
 const useStyles = makeStyles({
   root: {

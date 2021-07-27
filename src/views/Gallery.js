@@ -6,15 +6,14 @@ import PhotoCategory from '../components/PhotoCategory'
 import { v4 as uuid } from 'uuid'
 
 import Grid from '@material-ui/core/Grid'
+import Box from '@material-ui/core/Box'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles({
-  content: {
-    "& .gallery": {
-      animation: "$fade-in ease-in 0.1s"
-    },
+  gallery: {
+    animation: "$fade-in ease-in 0.1s",
     "@global" : {
       "@keyframes fade-in": {
         "0%": {
@@ -84,11 +83,9 @@ export default () => {
   return (
     <Choose>
       <When condition={loaded}>
-        <div className={classes.content}>
-          <div className="gallery">
-            {categoryList}
-          </div>
-        </div>
+        <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" >
+          {categoryList}
+        </Box>
       </When>
       <Otherwise>
         <Grid container alignItems="center" justifyContent="center" direction="column" className={classes.grid}  >

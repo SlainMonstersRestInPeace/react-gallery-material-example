@@ -1,31 +1,45 @@
 import React from 'react'
 
+import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import Box from '@material-ui/core/Box'
 
 import PhotoCard from './PhotoCard'
 
 import { v4 as uuid } from 'uuid'
 
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles({
+  mb2: {
+    marginBottom: "16px"
+  },
+})
+
 export default ({
   photos,
   label
 }) => {
+  const classes = useStyles();
+
   const photoList = photos.map(photo => {
     return (
       <Grid item key={uuid()}>
         <PhotoCard photo={photo}/>
       </Grid>
     );
-  })
+  });
 
   return (
-    <Box mb={2}>
-      <Typography variant="h4" className="mb-2">{label}</Typography>
-      <Grid container item spacing={2}>
-        {photoList}
-      </Grid>
+    <Box display="flex" flexDirection="column" mb={2}>
+      <Box mb={2}>
+        <Typography variant="h4">{label}</Typography>
+      </Box>
+      <Box display="flex" flexDirection="column"  >
+        <Grid container direction="row" spacing={2}>
+          {photoList}
+        </Grid>
+      </Box>
     </Box>
   )
 }
