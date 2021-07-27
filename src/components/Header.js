@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
-import Typography from '@material-ui/core/Typography';
+import Typography from '@material-ui/core/Typography'
 
-import Drawer from '@material-ui/core/Drawer';
+import Drawer from '@material-ui/core/Drawer'
 
-import { makeStyles } from '@material-ui/core/styles';
-import MenuContent from './MenuContent';
+import { makeStyles } from '@material-ui/core/styles'
+import MenuContent from './MenuContent'
 
 const useStyles = makeStyles({
   toggler: {

@@ -1,16 +1,18 @@
 import React from 'react'
 
-import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import { useState, useEffect } from 'react'
 
-import ImageInfoCard from '../components/ImageInfoCard';
+import ImageInfoCard from '../components/ImageInfoCard'
 
 import Grid from '@material-ui/core/Grid'
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from '@material-ui/core/CircularProgress'
 
-import { fetchPhoto } from '../redux/reducers/app';
+import { fetchPhoto } from '../redux/reducers/app'
 
 import { makeStyles } from '@material-ui/core/styles'
+
+import useCancelToken from '../hooks/useCancelToken'
 
 const useStyles = makeStyles({
   content: {
@@ -44,17 +46,28 @@ export default ({
 
   const [loaded, setLoaded] = useState(false);
 
+  const source = useCancelToken();
+
   async function mounted() {
-    await dispatch(fetchPhoto(id, {}));
+    const cancelToken = source.token;
+    const options = { cancelToken };
+
+    await dispatch(fetchPhoto(id, options));
 
     setTimeout(function() {
-      setLoaded(true)
+      if (!source.isCancelled()) {
+        setLoaded(true);
+      }
     }, 1000);
   }
 
   useEffect(() => {
     mounted();
-  }, [])
+
+    return function () {
+      source.cancel();
+    }
+  }, []);
 
   return (
     <Choose>

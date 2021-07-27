@@ -11,6 +11,8 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 
 import { makeStyles } from '@material-ui/core/styles'
 
+import useCancelToken from '../hooks/useCancelToken'
+
 const useStyles = makeStyles({
   gallery: {
     animation: "$fade-in ease-in 0.1s",
@@ -39,13 +41,20 @@ export default () => {
 
   const [loaded, setLoaded] = useState(false);
 
+  const source = useCancelToken();
+
   async function getPhotos() {
     const url = 'https://jsonplaceholder.typicode.com/photos/';
+    
+    const cancelToken = source.token;
+    const options = { cancelToken };
 
-    await dispatch(fetchPhotos(url, {}));
+    await dispatch(fetchPhotos(url, options));
 
     setTimeout(function() {
-      setLoaded(true);
+      if (!source.isCancelled()) {
+        setLoaded(true);
+      }
     }, 1000);
   }
 
@@ -55,6 +64,10 @@ export default () => {
 
   useEffect(() => {
     mounted();
+
+    return function() {
+      source.cancel();
+    }
   }, []);
 
   const items = loaded ? photos : [];

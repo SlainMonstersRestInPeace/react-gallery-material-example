@@ -4,8 +4,8 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import NavMenu from './NavMenu'
 
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider'
+import Typography from '@material-ui/core/Typography'
 
 import Avatar from '@material-ui/core/Avatar'
 
