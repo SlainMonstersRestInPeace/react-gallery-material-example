@@ -96,7 +96,7 @@ export default () => {
   return (
     <Choose>
       <When condition={loaded}>
-        <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" >
+        <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" className={classes.gallery} >
           {categoryList}
         </Box>
       </When>
