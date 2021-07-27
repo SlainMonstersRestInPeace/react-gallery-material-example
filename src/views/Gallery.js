@@ -5,29 +5,36 @@ import { fetchPhotos } from '../redux/reducers/app'
 import PhotoCategory from '../components/PhotoCategory'
 import { v4 as uuid } from 'uuid'
 
+import Grid from '@material-ui/core/Grid'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
-import { styled } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 
-const Content = styled('div')({
-  "& .gallery": {
-    animation: "$fade-in ease-in 0.1s"
+const useStyles = makeStyles({
+  content: {
+    "& .gallery": {
+      animation: "$fade-in ease-in 0.1s"
+    },
+    "@global" : {
+      "@keyframes fade-in": {
+        "0%": {
+          opacity: "0",
+          transform: "translateY(20px)"
+        },
+        "100%": {
+          opacity: '1'
+        }
+      } 
+    }
   },
-  "@global" : {
-    "@keyframes fade-in": {
-      "0%": {
-        opacity: "0",
-        transform: "translateY(20px)"
-      },
-      "100%": {
-        opacity: '1'
-      }
-    } 
+  grid: {
+    height: "800px"
   }
 });
 
-
 export default () => {
+  const classes = useStyles();
+
   const photos = useSelector(state => state.app.photos);
   const dispatch = useDispatch();
 
@@ -77,14 +84,16 @@ export default () => {
   return (
     <Choose>
       <When condition={loaded}>
-        <Content>
+        <div className={classes.content}>
           <div className="gallery">
             {categoryList}
           </div>
-        </Content>
+        </div>
       </When>
       <Otherwise>
-        <CircularProgress />
+        <Grid container alignItems="center" justifyContent="center" direction="column" className={classes.grid}  >
+          <CircularProgress />
+        </Grid>
       </Otherwise>
     </Choose>
   )

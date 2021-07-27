@@ -6,31 +6,39 @@ import { useState, useEffect } from 'react';
 import ImageInfoCard from '../components/ImageInfoCard';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Grid from '@material-ui/core/Grid'
 
 import { fetchPhoto } from '../redux/reducers/app';
 
-import { styled } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 
-const Content = styled('div')({
-  "&": {
-    animation: "$fade-in ease-in 0.1s"
+const useStyles = makeStyles({
+  content: {
+    "&": {
+      animation: "$fade-in ease-in 0.1s"
+    },
+    "@global" : {
+      "@keyframes fade-in": {
+        "0%": {
+          opacity: "0",
+          transform: "translateY(20px)"
+        },
+        "100%": {
+          opacity: '1'
+        }
+      } 
+    }
   },
-  "@global" : {
-    "@keyframes fade-in": {
-      "0%": {
-        opacity: "0",
-        transform: "translateY(20px)"
-      },
-      "100%": {
-        opacity: '1'
-      }
-    } 
-  }
-});
+  grid: {
+    height: "200px",
+  } 
+})
 
 export default ({
   id
 }) => {
+  const classes = useStyles();
+
   const photo = useSelector(state => state.app.photo);
   const dispatch = useDispatch();
 
@@ -51,12 +59,14 @@ export default ({
   return (
     <Choose>
       <When condition={loaded}>
-        <Content>
+        <div className={classes.content}>
           <ImageInfoCard photo={photo}/>
-        </Content>
+        </div>
       </When>
       <Otherwise>
-        <CircularProgress />
+        <Grid container alignItems="center" justifyContent="center" direction="column" className={classes.grid}  >
+          <CircularProgress />
+        </Grid>
       </Otherwise>
     </Choose>
   );
